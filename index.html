@@ -1,34 +1,495 @@
-<!-- TODO 1: Create the HTML Boilerplate -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maa Durga Lubricants – Batteries · Inverters · Lubricants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <title>ANUSIKTA'S PORTFOLIO</title>
+    :root {
+      --saffron: #E8841A;
+      --saffron-dark: #C06B0E;
+      --steel: #1A1A2E;
+      --steel-mid: #2C2C44;
+      --cream: #F9F5F0;
+      --green: #2D6A4F;
+      --green-light: #3A8C67;
+      --text-muted: #6B6B80;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--steel);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--steel);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 60px;
+      border-bottom: 3px solid var(--saffron);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--white);
+      letter-spacing: 0.08em;
+    }
+    .nav-logo span { color: var(--saffron); }
+    .nav-phone {
+      font-size: 0.85rem;
+      color: var(--saffron);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .nav-phone a { color: inherit; text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--steel);
+      color: var(--white);
+      padding: 80px 5vw 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Background texture lines */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.025) 40px,
+        rgba(255,255,255,0.025) 41px
+      );
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      max-width: 700px;
+    }
+    .hero-title .accent { color: var(--saffron); }
+    .hero-tagline {
+      margin-top: 24px;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 440px;
+      line-height: 1.6;
+    }
+    .hero-cta {
+      margin-top: 36px;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--saffron);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hero-cta:hover { background: var(--saffron-dark); }
+
+    /* Diagonal slash divider */
+    .slash-divider {
+      height: 60px;
+      background: var(--steel);
+      clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 64px 5vw 72px;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: 0.04em;
+      color: var(--steel);
+      margin-bottom: 40px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-top: 4px solid var(--saffron);
+      border-radius: 6px;
+      padding: 28px 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--steel);
+      margin-bottom: 8px;
+    }
+    .service-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── BRANDS ── */
+    .brands {
+      background: var(--steel-mid);
+      padding: 40px 5vw;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+    .brands-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+    .brand-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── WHY US ── */
+    .why {
+      padding: 72px 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 680px) {
+      .why { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .why-list { list-style: none; }
+    .why-list li {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .why-list li:last-child { border-bottom: none; }
+    .why-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--saffron);
+      line-height: 1;
+      min-width: 40px;
+    }
+    .why-text strong {
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .why-text span {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .why-callout {
+      background: var(--steel);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .why-callout .big-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--saffron);
+      line-height: 1;
+    }
+    .why-callout p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--green);
+      padding: 72px 5vw;
+      color: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 680px) {
+      .contact { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .contact .section-label { color: rgba(255,255,255,0.5); }
+    .contact .section-title { color: var(--white); margin-bottom: 24px; }
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+    .contact-row {
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .contact-icon {
+      font-size: 1.4rem;
+      margin-top: 2px;
+    }
+    .contact-detail strong {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 4px;
+    }
+    .contact-detail span, .contact-detail a {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .contact-detail a:hover { text-decoration: underline; }
+    .contact-map-placeholder {
+      background: rgba(0,0,0,0.25);
+      border-radius: 8px;
+      height: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .contact-map-placeholder span { font-size: 2.5rem; }
+    .contact-map-placeholder p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--steel);
+      padding: 24px 5vw;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center;
+      gap: 12px;
+    }
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+    footer strong { color: var(--saffron); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .hero { padding: 60px 5vw 40px; }
+      .hero-cta { width: 100%; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-    <h1>anusikta's Portfolio</h1>
-    <h2>i am a web developer</h2>
-    <hr />
-    <h3>movie choices</h3>
-    <h3><a href="./public/movie-ranking.html">movie ranking</a></h3>
-    <img src="./assets/images/movie-ranking.png" size="200" alt="movie ranking">
-    <h3><a href="./public/birthday-invite.html">birthday invite</a></h3>
-    <img src="./assets/images/birthday-invite.png" size="200" alt="birthday invite">
-    <h4><a href="./public/about.html" >about me</a> </h4>
-    <h4><a href="./public/contact.html">contact me</a> </h4>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Maa Durga <span>Lubricants</span></div>
+  <div class="nav-phone"><a href="tel:9861316536">📞 98613 16536</a></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Trusted Automotive Partner</p>
+  <h1 class="hero-title">MAA DURGA<br><span class="accent">LUBRICANTS</span></h1>
+  <p class="hero-tagline">Your one-stop shop for premium batteries, inverters, and lubricants. Quality products, reliable service — keeping your vehicles and home running smoothly.</p>
+  <a class="hero-cta" href="tel:9861316536">Call Us Now &rarr;</a>
+</section>
+<div class="slash-divider"></div>
+
+<!-- SERVICES -->
+<section class="services">
+  <p class="section-label">What We Offer</p>
+  <h2 class="section-title">Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🔋</span>
+      <p class="service-name">Batteries</p>
+      <p class="service-desc">Genuine Amaron and branded batteries for cars, bikes, trucks, and commercial vehicles. Long life. Really long.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⚡</span>
+      <p class="service-name">Inverters</p>
+      <p class="service-desc">Home and office inverter solutions. Sales, installation, and maintenance of reliable power backup systems.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🛢️</span>
+      <p class="service-name">Engine Oils</p>
+      <p class="service-desc">Veedol, Pensol, and top-grade engine oils for all vehicle types. Keeps your engine clean and protected.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⚙️</span>
+      <p class="service-name">Gear Oil & Grease</p>
+      <p class="service-desc">Full range of gear oils and greases for heavy-duty and passenger vehicles. Reduces wear, extends life.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🚿</span>
+      <p class="service-name">Brake Fluid</p>
+      <p class="service-desc">Trusted brake fluid products ensuring safe, reliable braking performance in all conditions.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🌡️</span>
+      <p class="service-name">Coolants</p>
+      <p class="service-desc">Premium engine coolants that prevent overheating and protect against corrosion year-round.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<div class="brands">
+  <span class="brands-label">Brands We Carry</span>
+  <span class="brand-pill">Amaron</span>
+  <span class="brand-pill">Veedol</span>
+  <span class="brand-pill">CEAT</span>
+  <span class="brand-pill">Pensol</span>
+  <span class="brand-pill">Amul</span>
+</div>
+
+<!-- WHY US -->
+<section class="why">
+  <ul class="why-list">
+    <li>
+      <div class="why-num">01</div>
+      <div class="why-text">
+        <strong>Genuine Products Only</strong>
+        <span>Every product is sourced directly from authorised distributors — no counterfeits, no compromises.</span>
+      </div>
+    </li>
+    <li>
+      <div class="why-num">02</div>
+      <div class="why-text">
+        <strong>Expert Guidance</strong>
+        <span>Not sure what your vehicle needs? Our team gives honest, experience-backed recommendations.</span>
+      </div>
+    </li>
+    <li>
+      <div class="why-num">03</div>
+      <div class="why-text">
+        <strong>Competitive Pricing</strong>
+        <span>Fair prices on all stock. No hidden charges. Walk in and compare — we'll match quality for value.</span>
+      </div>
+    </li>
+    <li>
+      <div class="why-num">04</div>
+      <div class="why-text">
+        <strong>Trusted by the Community</strong>
+        <span>Serving local drivers, workshops, and households in the area for years.</span>
+      </div>
+    </li>
+  </ul>
+  <div class="why-callout">
+    <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;">Call Anytime</p>
+    <div class="big-num">98613<br>16536</div>
+    <p>Talk directly for availability, pricing, or to place an order.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div>
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Contact &amp; Location</h2>
+    <div class="contact-info">
+      <div class="contact-row">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <strong>Address</strong>
+          <span>Maa Durga Lubricants, Odisha, India</span>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail">
+          <strong>Phone</strong>
+          <a href="tel:9861316536">98613 16536</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">🛒</div>
+        <div class="contact-detail">
+          <strong>Services</strong>
+          <span>Batteries · Inverters · Engine Oil · Gear Oil · Grease · Brake Fluid · Coolant</span>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-detail">
+          <strong>Hours</strong>
+          <span>Mon – Sat: 9:00 AM – 7:00 PM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-map-placeholder">
+    <span>🗺️</span>
+    <p>Maa Durga Lubricants<br>Visit us or call <strong>98613 16536</strong> for directions</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 <strong>Maa Durga Lubricants</strong>. All rights reserved.</p>
+  <p>Batteries · Inverters · Lubricants · Odisha, India</p>
+</footer>
+
 </body>
 </html>
-<!-- TODO 2: Add Your previous projects' HTML into the public folder -->
-
-<!-- TODO 3: Take screenshots of your project previews and add the images to the images folder -->
-
-<!-- TODO 4: Add titles/subtitles etc. -->
-
-<!-- TODO 5: Add a link to the project pages -->
-
-<!-- TODO 6: Add images to show the project previews
-HINT for TODO 6: You can use the height attribute set to 200 to make the image smaller:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height -->
-
-<!-- TODO 7: Add the Contact Me and About Me page links -->
